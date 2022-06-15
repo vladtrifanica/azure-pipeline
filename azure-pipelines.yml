@@ -18,19 +18,12 @@ stages:
         steps:
           - bash: |
               which bash
-              Sum=$(($a+$b))  
+              Sum=$(($a+$b))
+              echo $Sum>fisier.txt
             displayName: 'Compute Sum'
             env:
               a: 6
               b: 9
-            
-          - script: |
-              echo $Sum
-            displayName: 'Display Sum'
-          
-          - script:
-              echo $Sum>fisier.txt
-            displayName: 'Write sum to file'
           
           - publish: fisier.txt
             displayName: Publish artifact       
