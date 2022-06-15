@@ -25,7 +25,7 @@ stages:
               a: 6
               b: 9
           
-          - publish: sum_with_bash.txt.txt
+          - publish: sum_with_bash.txt
             displayName: Publish artifact
       
       - job:
