@@ -20,12 +20,12 @@ stages:
               which bash
               Sum=$(($a+$b))
               echo $Sum>sum_with_bash.txt
-            displayName: 'Compute Sum'
+            displayName: 'Write sum to file'
             env:
               a: 6
               b: 9
           
-          - publish: fisier.txt
+          - publish: sum_with_bash.txt.txt
             displayName: Publish artifact
       
       - job:
@@ -33,6 +33,10 @@ stages:
         steps:
           - powershell: | 
               ($a+$b)>sum_with_powershell.txt
+            displayName: 'Write sum to file'
             env:
               a: 6
               b: 9
+
+          - publish: sum_with_powershell.txt
+            displayName: Publish artifact
