@@ -9,27 +9,30 @@ trigger:
 pool:
   vmImage: ubuntu-latest
 
-  jobs:
-    - job:
-      displayName: steps.bash
-      steps:
-        - bash: |
-            which bash
-            Sum=$(($a+$b))
-            echo $Sum>sum_with_bash.txt
-          displayName: 'Compute Sum'
-          env:
-            a: 6
-            b: 9
-        
-        - publish: fisier.txt
-          displayName: Publish artifact
-    
-    - job:
-      displayName: steps.powershell
-      steps:
-        - powershell: | 
-            ($a+$b)>sum_with_powershell.txt
-          env:
-            a: 6
-            b: 9
+stages:
+  - stage:
+    displayName: Sum of two numbers
+    jobs:
+      - job:
+        displayName: steps.bash
+        steps:
+          - bash: |
+              which bash
+              Sum=$(($a+$b))
+              echo $Sum>sum_with_bash.txt
+            displayName: 'Compute Sum'
+            env:
+              a: 6
+              b: 9
+          
+          - publish: fisier.txt
+            displayName: Publish artifact
+      
+      - job:
+        displayName: steps.powershell
+        steps:
+          - powershell: | 
+              ($a+$b)>sum_with_powershell.txt
+            env:
+              a: 6
+              b: 9
