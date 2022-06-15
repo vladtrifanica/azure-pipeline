@@ -52,3 +52,14 @@ stages:
 
           - publish: sum_with_script.txt
             displayName: Publish artifact
+            
+      - job:
+        displayName: steps.pwsh
+        steps:
+          - pwsh: |
+              $Sum=${{ variables.a }}+${{ variables.b }}
+              $Sum>sum_with_pwsh.txt
+            displayName: 'Write sum to file'
+
+          - publish: sum_with_pwsh.txt
+            displayName: Publish artifact
