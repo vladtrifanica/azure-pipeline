@@ -6,6 +6,12 @@
 trigger:
 - main
 
+variables:
+- name: a
+  value: 6
+- name: b
+  value: 9
+
 pool:
   vmImage: ubuntu-latest
 
@@ -18,12 +24,9 @@ stages:
         steps:
           - bash: |
               which bash
-              Sum=$(($a+$b))
+              Sum=$((${{ variables.a }}+${{ variables.b }}))
               echo $Sum>sum_with_bash.txt
             displayName: 'Write sum to file'
-            env:
-              a: 6
-              b: 9
           
           - publish: sum_with_bash.txt
             displayName: Publish artifact
@@ -32,12 +35,9 @@ stages:
         displayName: steps.powershell
         steps:
           - powershell: |
-              $Sum=($env:a)+($env:b)
+              $Sum=${{ variables.a }}+${{ variables.b }}
               $Sum>sum_with_powershell.txt
             displayName: 'Write sum to file'
-            env:
-              a: 6
-              b: 9
 
           - publish: sum_with_powershell.txt
             displayName: Publish artifact
