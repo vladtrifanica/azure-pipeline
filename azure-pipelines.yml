@@ -31,8 +31,9 @@ stages:
       - job:
         displayName: steps.powershell
         steps:
-          - powershell: | 
-              ($a+$b)>sum_with_powershell.txt
+          - powershell: |
+              $Sum=$a+$b
+              $Sum>sum_with_powershell.txt
             displayName: 'Write sum to file'
             env:
               a: 6
