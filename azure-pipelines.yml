@@ -41,3 +41,14 @@ stages:
 
           - publish: sum_with_powershell.txt
             displayName: Publish artifact
+
+      - job:
+        displayName: steps.script
+        steps:
+          - script: |
+              Sum=$((${{ variables.a }}+${{ variables.b }}))
+              echo $Sum>sum_with_script.txt
+            displayName: 'Write sum to file'
+
+          - publish: sum_with_script.txt
+            displayName: Publish artifact
