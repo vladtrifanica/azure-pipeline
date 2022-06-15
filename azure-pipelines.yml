@@ -32,7 +32,7 @@ stages:
         displayName: steps.powershell
         steps:
           - powershell: |
-              $Sum=$a+$b
+              $Sum=$env:a+$env:b
               $Sum>sum_with_powershell.txt
             displayName: 'Write sum to file'
             env:
