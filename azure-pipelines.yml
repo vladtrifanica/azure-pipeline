@@ -30,6 +30,7 @@ stages:
           
           - publish: sum_with_bash.txt
             displayName: Publish artifact
+            name: artifact_bash
       
       - job:
         displayName: steps.powershell
