@@ -1,0 +1,63 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- main
+
+variables:
+- name: a
+  value: 6
+- name: b
+  value: 9
+
+pool:
+  vmImage: ubuntu-latest
+
+stages:
+  - stage:
+    displayName: Sum of two numbers
+    jobs:
+      - job:
+        displayName: steps.bash
+        steps:
+          - bash: |
+              which bash
+              Sum=$((${{ variables.a }}+${{ variables.b }}))
+              echo $Sum>sum_with_bash.txt
+            displayName: 'Write sum to file'
+          
+          - publish: sum_with_bash.txt
+            displayName: Publish artifact
+            artifact: artifact_bash
+      
+      - job:
+        displayName: steps.powershell
+        steps:
+          - powershell: |
+              $Sum=${{ variables.a }}+${{ variables.b }}
+              $Sum>sum_with_powershell.txt
+            displayName: 'Write sum to file'
+          - publish: sum_with_powershell.txt
+            displayName: Publish artifact
+
+      - job:
+        displayName: steps.script
+        steps:
+          - script: |
+              Sum=$((${{ variables.a }}+${{ variables.b }}))
+              echo $Sum>sum_with_script.txt
+            displayName: 'Write sum to file'
+          - publish: sum_with_script.txt
+            displayName: Publish artifact
+            
+      - job:
+        displayName: steps.pwsh
+        steps:
+          - pwsh: |
+              $Sum=${{ variables.a }}+${{ variables.b }}
+              $Sum>sum_with_pwsh.txt
+            displayName: 'Write sum to file'
+          - publish: sum_with_pwsh.txt
+            displayName: Publish artifact
